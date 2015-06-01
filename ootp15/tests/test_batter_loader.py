@@ -43,6 +43,29 @@ class TestBatterLoader(unittest.TestCase):
     def test_position(self):
         self.assertEqual(self.player.position, 'LF')
 
+    def test_ratings(self):
+        ratings = self.player.batting_ratings
+        self.assertEquals(ratings.contact, 8)
+        self.assertEquals(ratings.gap, 7)
+        self.assertEquals(ratings.power, 9)
+        self.assertEquals(ratings.eye, 6)
+        self.assertEquals(ratings.avoid_k, 6)
+        self.assertEquals(ratings.contact_r, 8)
+        self.assertEquals(ratings.gap_r, 7)
+        self.assertEquals(ratings.power_r, 9)
+        self.assertEquals(ratings.eye_r, 7)
+        self.assertEquals(ratings.avoid_k_r, 6)
+        self.assertEquals(ratings.contact_l, 7)
+        self.assertEquals(ratings.gap_l, 6)
+        self.assertEquals(ratings.power_l, 7)
+        self.assertEquals(ratings.eye_l, 5)
+        self.assertEquals(ratings.avoid_k_l, 5)
+        self.assertEquals(ratings.pot_contact, 8)
+        self.assertEquals(ratings.pot_gap, 7)
+        self.assertEquals(ratings.pot_power, 9)
+        self.assertEquals(ratings.pot_eye, 7)
+        self.assertEquals(ratings.pot_avoid_k, 6)
+
     def test_batting_stats(self):
         self.assertEqual(len(self.player.batting_stats), 16)
         self.assertEqual(len([stat for stat in self.player.batting_stats if stat.team_id == 32]), 3)

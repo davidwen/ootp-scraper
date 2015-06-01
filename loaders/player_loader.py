@@ -36,8 +36,10 @@ class PlayerLoader(Loader):
         player.career_positions = self.get_career_positions()
         if player.position in PITCHING_POSITIONS:
             player.pitching_stats = self.get_pitching_stats(player)
+            player.pitching_ratings = self.get_pitching_ratings(player)
         else:
             player.batting_stats = self.get_batting_stats(player)
+            player.batting_ratings = self.get_batting_ratings(player)
         player.retired = self.get_retired()
         PLAYER_CACHE[self.player_id] = player
         return player
@@ -82,6 +84,12 @@ class PlayerLoader(Loader):
         pass
 
     def get_pitching_stats(self, player):
+        pass
+
+    def get_batting_ratings(self, player):
+        pass
+
+    def get_pitching_ratings(self, player):
         pass
 
     def get_retired(self):

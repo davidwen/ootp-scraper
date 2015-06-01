@@ -45,3 +45,10 @@ class Player(object):
             for stat in self.batting_stats:
                 stat.save(cur)
             BatterCareerStat().combine(self.batting_stats).save(cur)
+
+    def save_ratings(self, cur, date_id):
+        self.save(cur)
+        if self.pitching_ratings:
+            self.pitching_ratings.save(cur, date_id)
+        if self.batting_ratings:
+            self.batting_ratings.save(cur, date_id)

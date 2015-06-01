@@ -4,8 +4,10 @@ from constants import PERSONALITY_RATINGS
 from loaders import player_loader
 from team_loader import TeamLoader
 
+from ootp15.batter_ratings_loader import BatterRatingsLoader
 from ootp15.batter_stat_loader import BatterStatLoader
 from ootp15.free_agents_loader import FreeAgentsLoader
+from ootp15.pitcher_ratings_loader import PitcherRatingsLoader
 from ootp15.pitcher_stat_loader import PitcherStatLoader
 
 class PlayerLoader(player_loader.PlayerLoader):
@@ -89,6 +91,12 @@ class PlayerLoader(player_loader.PlayerLoader):
 
     def get_pitching_stats(self, player):
         return PitcherStatLoader(self.soup, player).stats
+
+    def get_batting_ratings(self, player):
+        return BatterRatingsLoader(self.soup, player).ratings
+
+    def get_pitching_ratings(self, player):
+        return PitcherRatingsLoader(self.soup, player).ratings
 
     def get_retired(self):
         return self.get_table_value(self.soup, 'Contract:') == 'RETIRED'

@@ -43,9 +43,28 @@ class TestPitcherLoader(unittest.TestCase):
     def test_position(self):
         self.assertEqual(self.player.position, 'MR')
 
-    def test_batting_stats(self):
+    def test_pitching_stats(self):
         self.assertEquals(len(self.player.pitching_stats), 10)
         self.assertEquals(len([stat for stat in self.player.pitching_stats if stat.team_id == 488]), 8)
+
+    def test_pitching_ratings(self):
+        ratings = self.player.pitching_ratings
+        self.assertEquals(ratings.stuff, 7)
+        self.assertEquals(ratings.movement, 6)
+        self.assertEquals(ratings.control, 8)
+        self.assertEquals(ratings.stuff_l, 7)
+        self.assertEquals(ratings.movement_l, 6)
+        self.assertEquals(ratings.control_l, 7)
+        self.assertEquals(ratings.stuff_r, 7)
+        self.assertEquals(ratings.movement_r, 6)
+        self.assertEquals(ratings.control_r, 8)
+        self.assertEquals(ratings.pot_stuff, 7)
+        self.assertEquals(ratings.pot_movement, 6)
+        self.assertEquals(ratings.pot_control, 8)
+        self.assertEquals(ratings.stamina, 7)
+        self.assertEquals(ratings.velocity, 91)
+        self.assertEquals(ratings.hold, 3)
+        self.assertEquals(ratings.groundball, 59)
 
     def test_retired(self):
         self.assertEquals(self.player.retired, False)

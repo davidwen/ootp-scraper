@@ -147,3 +147,57 @@ CREATE TABLE IF NOT EXISTS waiver_wire (
 
 CREATE TABLE IF NOT EXISTS current_date (
     date TEXT);
+
+CREATE TABLE IF NOT EXISTS dates(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date TEXT UNIQUE);
+
+CREATE TABLE IF NOT EXISTS batting_ratings(
+    player_id INTEGER,
+    date_id INTEGER,
+    contact INTEGER,
+    gap INTEGER,
+    power INTEGER,
+    eye INTEGER,
+    avoid_k INTEGER,
+    contact_r INTEGER,
+    gap_r INTEGER,
+    power_r INTEGER,
+    eye_r INTEGER,
+    avoid_k_r INTEGER,
+    contact_l INTEGER,
+    gap_l INTEGER,
+    power_l INTEGER,
+    eye_l INTEGER,
+    avoid_k_l INTEGER,
+    pot_contact INTEGER,
+    pot_gap INTEGER,
+    pot_power INTEGER,
+    pot_eye INTEGER,
+    pot_avoid_k INTEGER,
+    PRIMARY KEY (player_id, date_id),
+    FOREIGN KEY (player_id) REFERENCES players(id),
+    FOREIGN KEY (date_id) REFERENCES dates(id));
+
+CREATE TABLE IF NOT EXISTS pitching_ratings(
+    player_id INTEGER,
+    date_id INTEGER,
+    stuff INTEGER,
+    movement INTEGER,
+    control INTEGER,
+    stuff_l INTEGER,
+    movement_l INTEGER,
+    control_l INTEGER,
+    stuff_r INTEGER,
+    movement_r INTEGER,
+    control_r INTEGER,
+    pot_stuff INTEGER,
+    pot_movement INTEGER,
+    pot_control INTEGER,
+    stamina INTEGER,
+    velocity INTEGER,
+    hold INTEGER,
+    groundball INTEGER,
+    PRIMARY KEY (player_id, date_id),
+    FOREIGN KEY (player_id) REFERENCES players(id),
+    FOREIGN KEY (date_id) REFERENCES dates(id));
