@@ -1,0 +1,2 @@
+PLAYER_CACHE = {}
+TEAM_CACHE = {}
