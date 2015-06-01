@@ -1,22 +1,21 @@
 import configuration
 import re
 
-from bs4 import BeautifulSoup
 from cache import PLAYER_CACHE
 from constants import PITCHING_POSITIONS
+from loaders.loader import Loader
 from models.player import Player
 
-class PlayerLoader(object):
+class PlayerLoader(Loader):
     
     def __init__(self, player_id):
         self.player_id = player_id
-        self.soup = self.get_soup()
+        self.soup = self.get_player_soup()
         self.player = self.load_player()
+        Loader.__init__(self)
 
-    def get_soup(self):
-        filename = '{}/players/player_{}.html'.format(configuration.ROOT, self.player_id)
-        with open(filename, 'rb') as f:
-            return BeautifulSoup(f.read())
+    def get_player_soup(self):
+        return self.get_soup('{}/players/player_{}.html'.format(configuration.ROOT, self.player_id))
 
     def load_player(self):
         if PLAYER_CACHE.has_key(self.player_id):
