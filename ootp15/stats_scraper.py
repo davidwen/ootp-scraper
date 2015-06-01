@@ -7,7 +7,7 @@ from ootp15.league_loader import LeagueLoader
 from ootp15.player_loader import PlayerLoader
 from ootp15.team_loader import TeamLoader
 
-class Scraper(object):
+class StatsScraper(object):
 
     def __init__(self):
         pass
@@ -27,6 +27,3 @@ class Scraper(object):
                         db.commit()
                     except:
                         print 'ERROR ' + str(player_id)
-
-if __name__ == '__main__':
-    Scraper().save_stats()
