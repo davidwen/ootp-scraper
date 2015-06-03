@@ -37,8 +37,30 @@ class BatterRatings(object):
              ?, ?, ?, ?, ?,
              ?, ?, ?, ?, ?,
              ?, ?, ?, ?, ?)''',
-            (self.player_id, self.date_id,
+            (self.player_id, date_id,
              self.contact, self.gap, self.power, self.eye, self.avoid_k,
              self.contact_r, self.gap_r, self.power_r, self.eye_r, self.avoid_k_r,
              self.contact_l, self.gap_l, self.power_l, self.eye_l, self.avoid_k_l,
              self.pot_contact, self.pot_gap, self.pot_power, self.pot_eye, self.pot_avoid_k))
+
+    def is_updated(self, ratings):
+        return self.contact != ratings.contact or \
+            self.gap != ratings.gap or \
+            self.power != ratings.power or \
+            self.eye != ratings.eye or \
+            self.avoid_k != ratings.avoid_k or \
+            self.contact_r != ratings.contact_r or \
+            self.gap_r != ratings.gap_r or \
+            self.power_r != ratings.power_r or \
+            self.eye_r != ratings.eye_r or \
+            self.avoid_k_r != ratings.avoid_k_r or \
+            self.contact_l != ratings.contact_l or \
+            self.gap_l != ratings.gap_l or \
+            self.power_l != ratings.power_l or \
+            self.eye_l != ratings.eye_l or \
+            self.avoid_k_l != ratings.avoid_k_l or \
+            self.pot_contact != ratings.pot_contact or \
+            self.pot_gap != ratings.pot_gap or \
+            self.pot_power != ratings.pot_power or \
+            self.pot_eye != ratings.pot_eye or \
+            self.pot_avoid_k != ratings.pot_avoid_k

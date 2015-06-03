@@ -3,9 +3,7 @@ import os
 import sqlite3
 
 from contextlib import closing
-from ootp15.league_loader import LeagueLoader
 from ootp15.player_loader import PlayerLoader
-from ootp15.team_loader import TeamLoader
 
 class StatsScraper(object):
 

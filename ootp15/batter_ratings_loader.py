@@ -1,5 +1,3 @@
-import re
-
 from models import batter_ratings
 
 class BatterRatingsLoader():

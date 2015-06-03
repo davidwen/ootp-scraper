@@ -33,8 +33,14 @@ class PitcherRatingsLoader(loader.Loader):
         ratings.groundball = self.get_groundball()
         return ratings
 
+    def convert_value(self, value):
+        if value == '-' or value == '':
+            return 0
+        else:
+            return int(value)
+
     def get_values(self):
-        return [int(td.text) for td in self.soup.find_all('td', class_='dc')[14:26] if td.text]
+        return [self.convert_value(td.text) for td in self.soup.find_all('td', class_='dc')[14:26]]
 
     def get_table_value(self, key):
         return self.soup.find(text=re.compile(key)).parent.next_sibling.next_sibling.text
@@ -76,13 +82,13 @@ class PitcherRatingsLoader(loader.Loader):
         return self.values[11]
 
     def get_stamina(self):
-        return int(self.get_table_value('Stamina'))
+        return self.convert_value(self.get_table_value('Stamina'))
 
     def get_velocity(self):
-        return int(self.get_table_value('Velocity').split(' ')[0].split('-')[1])
+        return self.convert_value(self.get_table_value('Velocity').split(' ')[0].split('-')[1])
 
     def get_hold(self):
-        return int(self.get_table_value('Hold Runners'))
+        return self.convert_value(self.get_table_value('Hold Runners'))
 
     def get_groundball(self):
-        return int(self.get_table_value('Groundball Percentage').split(' ')[0])
+        return self.convert_value(self.get_table_value('Groundball Percentage').split(' ')[0])

@@ -1,6 +1,5 @@
 import re
 
-from models.league import League
 from loaders import league_loader
 
 class LeagueLoader(league_loader.LeagueLoader):

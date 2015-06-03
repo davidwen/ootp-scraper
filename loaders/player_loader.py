@@ -18,8 +18,6 @@ class PlayerLoader(Loader):
         return self.get_soup('{}/players/player_{}.html'.format(configuration.ROOT, self.player_id))
 
     def load_player(self):
-        if PLAYER_CACHE.has_key(self.player_id):
-            return PLAYER_CACHE[self.player_id]
         player = Player()
         player.id = self.player_id
         player.name = self.get_name()
@@ -41,7 +39,6 @@ class PlayerLoader(Loader):
             player.batting_stats = self.get_batting_stats(player)
             player.batting_ratings = self.get_batting_ratings(player)
         player.retired = self.get_retired()
-        PLAYER_CACHE[self.player_id] = player
         return player
 
     def get_name(self):

@@ -41,3 +41,19 @@ class PitcherRatings(object):
              self.stuff_r, self.movement_r, self.control_r,
              self.pot_stuff, self.pot_movement, self.pot_control,
              self.stamina, self.velocity, self.hold, self.groundball))
+
+    def is_updated(self, ratings):
+        return self.stuff != ratings.stuff or \
+            self.movement != ratings.movement or \
+            self.control != ratings.control or \
+            self.stuff_l != ratings.stuff_l or \
+            self.movement_l != ratings.movement_l or \
+            self.control_l != ratings.control_l or \
+            self.stuff_r != ratings.stuff_r or \
+            self.movement_r != ratings.movement_r or \
+            self.control_r != ratings.control_r or \
+            self.pot_stuff != ratings.pot_stuff or \
+            self.pot_movement != ratings.pot_movement or \
+            self.pot_control != ratings.pot_control or \
+            self.stamina != ratings.stamina or \
+            self.velocity != ratings.velocity

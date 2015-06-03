@@ -17,7 +17,7 @@ class WaiverWireScraper(object):
             cur.execute('delete from current_date')
 
             current_date = DateLoader().get_current_date()
-            cur.execute('insert into current_date (date) values (?)', ([current_date]))
+            cur.execute('insert into current_date (date) values (?)', (current_date,))
             leagues = LeagueLoader().load_all()
             for league in leagues:
                 if league.waiver_wire:

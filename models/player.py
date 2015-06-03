@@ -18,6 +18,8 @@ class Player(object):
         self.position = None
         self.pitching_stats = None
         self.batting_stats = None
+        self.pitching_ratings = None
+        self.batting_ratings = None
         self.career_positions = None
         self.retired = None
 
@@ -52,3 +54,9 @@ class Player(object):
             self.pitching_ratings.save(cur, date_id)
         if self.batting_ratings:
             self.batting_ratings.save(cur, date_id)
+
+    def has_updated_ratings(self, ratings):
+        if self.pitching_ratings:
+            return self.pitching_ratings.is_updated(ratings)
+        if self.batting_ratings:
+            return self.batting_ratings.is_updated(ratings)
