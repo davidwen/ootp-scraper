@@ -201,3 +201,14 @@ CREATE TABLE IF NOT EXISTS pitching_ratings(
     PRIMARY KEY (player_id, date_id),
     FOREIGN KEY (player_id) REFERENCES players(id),
     FOREIGN KEY (date_id) REFERENCES dates(id));
+
+CREATE TABLE IF NOT EXISTS teams(
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    level TEXT,
+    parent_id INTEGER,
+    FOREIGN KEY (parent_id) REFERENCES teams(id));
+
+CREATE TABLE IF NOT EXISTS starred (
+    player_id INTEGER,
+    PRIMARY KEY (player_id));

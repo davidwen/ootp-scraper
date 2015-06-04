@@ -14,37 +14,37 @@ class RatingsScraper(object):
     def __init__(self):
         pass
 
-    # def save_ratings(self):
-    #     with closing(sqlite3.connect(configuration.DATABASE)) as db:
-    #         cur = db.cursor()
-    #         date_id = self.get_date_id(cur)
-    #         for dirname, dirnames, filenames in os.walk(configuration.ROOT + '/players'):
-    #             for filename in filenames:
-    #                 if filename[0] == '.':
-    #                     continue
-    #                 player_id = int(filename.split('_')[1].split('.')[0])
-    #                 print player_id
-    #                 player = PlayerLoader(player_id).player
-    #                 if not player.retired:
-    #                     prev_ratings = self.get_prev_ratings(cur, player)
-    #                     if prev_ratings is None or player.has_updated_ratings(prev_ratings):
-    #                         player.save_ratings(cur, date_id)
-    #                         db.commit()
-
     def save_ratings(self):
         with closing(sqlite3.connect(configuration.DATABASE)) as db:
             cur = db.cursor()
             date_id = self.get_date_id(cur)
-            cur.execute('select id from players where retired = 0 and id > 0')
-            for row in cur.fetchall():
-                player_id = int(row[0])
-                print player_id
-                player = PlayerLoader(player_id).player
-                if not player.retired:
-                    prev_ratings = self.get_prev_ratings(cur, player)
-                    if prev_ratings is None or player.has_updated_ratings(prev_ratings):
-                        player.save_ratings(cur, date_id)
-                        db.commit()
+            for dirname, dirnames, filenames in os.walk(configuration.ROOT + '/players'):
+                for filename in filenames:
+                    if filename[0] == '.':
+                        continue
+                    player_id = int(filename.split('_')[1].split('.')[0])
+                    print player_id
+                    player = PlayerLoader(player_id).player
+                    if not player.retired:
+                        prev_ratings = self.get_prev_ratings(cur, player)
+                        if prev_ratings is None or player.has_updated_ratings(prev_ratings):
+                            player.save_ratings(cur, date_id)
+                            db.commit()
+
+    # def save_ratings(self):
+    #     with closing(sqlite3.connect(configuration.DATABASE)) as db:
+    #         cur = db.cursor()
+    #         date_id = self.get_date_id(cur)
+    #         cur.execute('select id from players where retired = 0 and id > 0')
+    #         for row in cur.fetchall():
+    #             player_id = int(row[0])
+    #             print player_id
+    #             player = PlayerLoader(player_id).player
+    #             if not player.retired:
+    #                 prev_ratings = self.get_prev_ratings(cur, player)
+    #                 if prev_ratings is None or player.has_updated_ratings(prev_ratings):
+    #                     player.save_ratings(cur, date_id)
+    #                     db.commit()
 
     def get_date_id(self, cur):
         current_date = DateLoader().date

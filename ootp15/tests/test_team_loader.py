@@ -15,3 +15,6 @@ class TestTeamLoader(unittest.TestCase):
 
     def test_level(self):
         self.assertEqual(self.team.level, 'AAA')
+
+    def test_parent_team_id(self):
+        self.assertEqual(self.team.parent_team_id, 422)

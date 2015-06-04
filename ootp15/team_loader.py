@@ -1,3 +1,5 @@
+import re
+
 from loaders import team_loader
 
 class TeamLoader(team_loader.TeamLoader):
@@ -15,6 +17,11 @@ class TeamLoader(team_loader.TeamLoader):
             return full_name[full_name.find('(') + 1:full_name.find(')')]
         else:
             return 'ML'
+
+    def get_parent_team_id(self, soup):
+        link = soup.find(text=re.compile('LINKS')).parent.parent.parent.find_all('a')[-1]
+        if 'minor' not in link['href']:
+            return int(link['href'].split('_')[1].split('.')[0])
 
     def get_player_positions(self, soup):
         player_positions = {}
