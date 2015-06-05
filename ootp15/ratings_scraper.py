@@ -18,6 +18,7 @@ class RatingsScraper(object):
         with closing(sqlite3.connect(configuration.DATABASE)) as db:
             cur = db.cursor()
             date_id = self.get_date_id(cur)
+            db.commit()
             for dirname, dirnames, filenames in os.walk(configuration.ROOT + '/players'):
                 for filename in filenames:
                     if filename[0] == '.':

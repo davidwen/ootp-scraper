@@ -50,7 +50,7 @@ class PlayerLoader(player_loader.PlayerLoader):
         if position == 'P':
             team_id = self.get_team_id()
             if team_id:
-                team = TeamLoader().load_team(self.get_team_id())
+                team = TeamLoader(self.get_team_id()).team
                 if team.player_positions.has_key(self.player_id):
                     return team.player_positions[self.player_id]
             else:

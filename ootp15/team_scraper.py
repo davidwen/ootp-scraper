@@ -41,7 +41,7 @@ class TeamScraper(object):
         leagues = LeagueLoader().load_all()
         for league in leagues:
             for team_id in league.team_ids:
-                team = TeamLoader().load_team(team_id)
+                team = TeamLoader(team_id).team
                 cur.execute('''
                     insert or ignore into teams
                     (id, name, level, parent_id)

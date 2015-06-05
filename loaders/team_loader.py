@@ -6,34 +6,41 @@ from models.team import Team
 
 class TeamLoader(Loader):
 
-    def get_team_roster_soup(self, team_id):
-        return self.get_soup('{}/teams/team_{}_roster_page.html'.format(configuration.ROOT, team_id))
+    def __init__(self, team_id):
+        self.team_id = team_id
+        self.roster_soup = self.get_team_roster_soup()
+        self.home_soup = self.get_team_home_soup()
+        self.team = self.load_team()
+        Loader.__init__(self)
 
-    def get_team_home_soup(self, team_id):
-        return self.get_soup('{}/teams/team_{}.html'.format(configuration.ROOT, team_id))
+    def get_team_roster_soup(self):
+        return self.get_soup('{}/teams/team_{}_roster_page.html'.format(configuration.ROOT, self.team_id))
 
-    def load_team(self, team_id):
-        if TEAM_CACHE.has_key(team_id):
-            return TEAM_CACHE[team_id]
-        roster_soup = self.get_team_roster_soup(team_id)
-        home_soup = self.get_team_home_soup(team_id)
+    def get_team_home_soup(self):
+        return self.get_soup('{}/teams/team_{}.html'.format(configuration.ROOT, self.team_id))
+
+    def load_team(self):
+        if TEAM_CACHE.has_key(self.team_id):
+            return TEAM_CACHE[self.team_id]
+        roster_soup = self.get_team_roster_soup()
+        home_soup = self.get_team_home_soup()
         team = Team()
-        team.id = team_id
-        team.name = self.get_name(roster_soup)
-        team.level = self.get_level(roster_soup)
-        team.parent_team_id = self.get_parent_team_id(home_soup)
-        team.player_positions = self.get_player_positions(roster_soup)
-        TEAM_CACHE[team_id] = team
+        team.id = self.team_id
+        team.name = self.get_name()
+        team.level = self.get_level()
+        team.parent_team_id = self.get_parent_team_id()
+        team.player_positions = self.get_player_positions()
+        TEAM_CACHE[self.team_id] = team
         return team
 
-    def get_name(self, soup):
+    def get_name(self):
         pass
 
-    def get_level(self, soup):
+    def get_level(self):
         pass
 
-    def get_parent_team_id(self, soup):
+    def get_parent_team_id(self):
         pass
 
-    def get_player_positions(self, soup):
+    def get_player_positions(self):
         pass

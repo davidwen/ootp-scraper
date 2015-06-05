@@ -5,7 +5,7 @@ import unittest
 class TestTeamLoader(unittest.TestCase):
 
     def setUp(self):
-        self.team = TeamLoader().load_team(430)
+        self.team = TeamLoader(430).team
 
     def test_id(self):
         self.assertEqual(self.team.id, 430)
