@@ -209,6 +209,15 @@ CREATE TABLE IF NOT EXISTS teams(
     parent_id INTEGER,
     FOREIGN KEY (parent_id) REFERENCES teams(id));
 
+CREATE TABLE IF NOT EXISTS player_teams(
+    player_id INTEGER,
+    date_id INTEGER,
+    team_id INTEGER,
+    PRIMARY KEY (player_id, date_id),
+    FOREIGN KEY (player_id) REFERENCES players(id),
+    FOREIGN KEY (date_id) REFERENCES dates(id),
+    FOREIGN KEY (team_id) REFERENCES teams(id));
+
 CREATE TABLE IF NOT EXISTS starred (
     player_id INTEGER,
     PRIMARY KEY (player_id));
