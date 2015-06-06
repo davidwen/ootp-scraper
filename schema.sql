@@ -140,17 +140,14 @@ CREATE TABLE IF NOT EXISTS hall_of_fame_eligible (
     player_id INTEGER,
     FOREIGN KEY (player_id) REFERENCES players(id));
 
-CREATE TABLE IF NOT EXISTS waiver_wire (
-    date TEXT,
-    player_id INTEGER,
-    FOREIGN KEY (player_id) REFERENCES players(id));
-
-CREATE TABLE IF NOT EXISTS current_date (
-    date TEXT);
-
 CREATE TABLE IF NOT EXISTS dates(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     date TEXT UNIQUE);
+
+CREATE TABLE IF NOT EXISTS waiver_wire(
+    date_id INTEGER,
+    player_id INTEGER,
+    PRIMARY KEY (player_id, date_id));
 
 CREATE TABLE IF NOT EXISTS batting_ratings(
     player_id INTEGER,

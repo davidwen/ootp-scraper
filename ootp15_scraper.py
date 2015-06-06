@@ -10,8 +10,8 @@ class OOTP15Scraper(object):
 
     def scrape(self):
         # StatsScraper().save_stats()
-        # WaiverWireScraper().update_waiver_wire()
-        # RatingsScraper().save_ratings()
+        WaiverWireScraper().update_waiver_wire()
+        RatingsScraper().save_ratings()
         TeamScraper().save_teams()
 
 if __name__ == '__main__':

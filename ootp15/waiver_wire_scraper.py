@@ -14,17 +14,24 @@ class WaiverWireScraper(object):
     def update_waiver_wire(self):
         with closing(sqlite3.connect(configuration.DATABASE)) as db:
             cur = db.cursor()
-            cur.execute('delete from current_date')
-
-            current_date = DateLoader().get_current_date()
-            cur.execute('insert into current_date (date) values (?)', (current_date,))
+            date_id = self.get_date_id(cur)
             leagues = LeagueLoader().load_all()
             for league in leagues:
                 if league.waiver_wire:
                     for player_id in league.waiver_wire:
                         cur.execute('''
                             insert into waiver_wire
-                            (date, player_id)
+                            (date_id, player_id)
                             values
-                            (?, ?)''' , (current_date, player_id))
+                            (?, ?)''' , (date_id, player_id))
             db.commit()
+
+    def get_date_id(self, cur):
+        current_date = DateLoader().date
+        cur.execute('''
+            insert or ignore into dates
+            (date)
+            values
+            (?)''', ([current_date]))
+        cur.execute('select id from dates where date = ?', ([current_date]))
+        return cur.fetchone()[0]
