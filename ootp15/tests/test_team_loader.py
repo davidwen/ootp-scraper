@@ -6,6 +6,7 @@ class TestTeamLoader(unittest.TestCase):
 
     def setUp(self):
         self.team = TeamLoader(430).team
+        self.ml_team = TeamLoader(623).team
 
     def test_id(self):
         self.assertEqual(self.team.id, 430)
@@ -18,3 +19,6 @@ class TestTeamLoader(unittest.TestCase):
 
     def test_parent_team_id(self):
         self.assertEqual(self.team.parent_team_id, 422)
+
+    def test_count(self):
+        self.assertEqual(len(self.ml_team.player_positions), 25)

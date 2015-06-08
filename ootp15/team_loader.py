@@ -31,11 +31,16 @@ class TeamLoader(team_loader.TeamLoader):
         for table in tables:
             rows = table.find_all('tr')
             for row in rows:
-                link = row.find('a')
-                if not link:
+                links = row.find_all('a')
+                if not links:
                     continue
-                url = link['href']
-                player_id = int(url.split('_')[1].split('.')[0])
-                position = row.find_all('td')[1].text
-                player_positions[player_id] = position
+                player_link = links[0]
+                team_link = links[1]
+                team_url = team_link['href']
+                team_id = int(team_url.split('_')[1].split('.')[0])
+                if self.team_id == team_id:
+                    player_url = player_link['href']
+                    player_id = int(player_url.split('_')[1].split('.')[0])
+                    position = row.find_all('td')[1].text
+                    player_positions[player_id] = position
         return player_positions
