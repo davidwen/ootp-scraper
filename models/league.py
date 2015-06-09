@@ -6,3 +6,5 @@ class League(object):
         self.is_major = None
         self.team_ids = None
         self.waiver_wire = None
+        self.injured_player_ids = None
+        self.payrolls = None

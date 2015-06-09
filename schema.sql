@@ -218,3 +218,18 @@ CREATE TABLE IF NOT EXISTS player_teams(
 CREATE TABLE IF NOT EXISTS starred (
     player_id INTEGER,
     PRIMARY KEY (player_id));
+
+CREATE TABLE IF NOT EXISTS payrolls (
+    date_id INTEGER,
+    team_id INTEGER,
+    payroll INTEGER,
+    PRIMARY KEY (date_id, team_id),
+    FOREIGN KEY (date_id) REFERENCES dates(id),
+    FOREIGN KEY (team_id) REFERENCES teams(id));
+
+CREATE TABLE IF NOT EXISTS healed_players (
+    date_id INTEGER,
+    player_id INTEGER,
+    PRIMARY KEY (date_id, player_id),
+    FOREIGN KEY (date_id) REFERENCES dates(id),
+    FOREIGN KEY (player_id) REFERENCES players(id));

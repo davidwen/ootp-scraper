@@ -30,6 +30,7 @@ class TeamLoader(Loader):
         team.level = self.get_level()
         team.parent_team_id = self.get_parent_team_id()
         team.player_positions = self.get_player_positions()
+        team.disabled_list_player_ids = self.get_disabled_list_player_ids()
         TEAM_CACHE[self.team_id] = team
         return team
 
@@ -43,4 +44,7 @@ class TeamLoader(Loader):
         pass
 
     def get_player_positions(self):
+        pass
+
+    def get_disabled_list_player_ids(self):
         pass

@@ -6,3 +6,4 @@ class Team(object):
         self.level = None
         self.parent_team_id = None
         self.player_positions = None
+        self.disabled_list_player_ids = None

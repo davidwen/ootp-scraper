@@ -1,3 +1,4 @@
+from ootp15.check_scraper import CheckScraper
 from ootp15.ratings_scraper import RatingsScraper
 from ootp15.stats_scraper import StatsScraper
 from ootp15.team_scraper import TeamScraper
@@ -10,6 +11,7 @@ class OOTP15Scraper(object):
 
     def scrape(self):
         # StatsScraper().save_stats()
+        CheckScraper().update_checks()
         WaiverWireScraper().update_waiver_wire()
         RatingsScraper().save_ratings()
         TeamScraper().save_teams()

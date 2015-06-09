@@ -44,3 +44,16 @@ class TeamLoader(team_loader.TeamLoader):
                     position = row.find_all('td')[1].text
                     player_positions[player_id] = position
         return player_positions
+
+    def get_disabled_list_player_ids(self):
+        disabled_list_player_ids = set()
+        dl = self.roster_soup.find('td', text=re.compile('DISABLED LIST'))
+        if dl:
+            table = dl.parent.next_sibling.next_sibling.find('table')
+            rows = table.find_all('tr')
+            for row in rows:
+                link = row.find('a')
+                if link:
+                    player_id = int(link['href'].split('_')[1].split('.')[0])
+                    disabled_list_player_ids.add(player_id)
+        return disabled_list_player_ids
