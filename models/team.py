@@ -5,5 +5,6 @@ class Team(object):
         self.name = None
         self.level = None
         self.parent_team_id = None
+        self.league_id = None
         self.player_positions = None
         self.disabled_list_player_ids = None

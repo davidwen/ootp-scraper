@@ -29,6 +29,7 @@ class TeamLoader(Loader):
         team.name = self.get_name()
         team.level = self.get_level()
         team.parent_team_id = self.get_parent_team_id()
+        team.league_id = self.get_league_id()
         team.player_positions = self.get_player_positions()
         team.disabled_list_player_ids = self.get_disabled_list_player_ids()
         TEAM_CACHE[self.team_id] = team
@@ -41,6 +42,9 @@ class TeamLoader(Loader):
         pass
 
     def get_parent_team_id(self):
+        pass
+
+    def get_league_id(self):
         pass
 
     def get_player_positions(self):

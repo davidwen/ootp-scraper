@@ -48,10 +48,15 @@ class CheckScraper(object):
 
     def get_date_id(self, cur):
         current_date = DateLoader().date
+        cur.execute('select id from dates where date = ?', (current_date,))
+        row = cur.fetchone()
+        if row:
+            return row[0]
+        cur.execute('select max(id) from dates')
+        date_id = cur.fetchone()[0] + 1
         cur.execute('''
-            insert or ignore into dates
-            (date)
+            insert into dates
+            (id, date)
             values
-            (?)''', ([current_date]))
-        cur.execute('select id from dates where date = ?', ([current_date]))
-        return cur.fetchone()[0]
+            (?, ?)''', (date_id, current_date))
+        return date_id

@@ -25,6 +25,10 @@ class TeamLoader(team_loader.TeamLoader):
         else:
             return self.team_id
 
+    def get_league_id(self):
+        link = self.home_soup.find('a')
+        return int(link['href'].split('_')[1].split('.')[0])
+
     def get_player_positions(self):
         player_positions = {}
         tables = self.roster_soup.find_all('table', class_='data sortable')
