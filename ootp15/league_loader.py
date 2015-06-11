@@ -18,6 +18,10 @@ class LeagueLoader(league_loader.LeagueLoader):
     def get_is_major(self, soup):
         return soup.find('a', text=re.compile('Top Systems')) is not None
 
+    def get_short_name(self, soup):
+        td = soup.find('td', class_='menu')
+        return td.find_all('a')[1].text
+
     def get_team_ids(self, soup):
         team_ids = []
         links = soup.find_all('a', text=re.compile('Home Page'))

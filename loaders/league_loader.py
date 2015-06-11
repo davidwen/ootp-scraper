@@ -32,6 +32,8 @@ class LeagueLoader(Loader):
         league.name = self.get_name(home_soup)
         league.is_major = self.get_is_major(home_soup)
         league.team_ids = self.get_team_ids(team_soup)
+        league.parent_id = self.get_parent_id(home_soup)
+        league.short_name = self.get_short_name(home_soup)
         if league.is_major:
             waiver_soup = self.get_waiver_wire_soup(league_id)
             injury_soup = self.get_injury_soup(league_id)
@@ -58,6 +60,12 @@ class LeagueLoader(Loader):
         pass
 
     def get_team_ids(self, soup):
+        pass
+
+    def get_parent_id(self, soup):
+        pass
+
+    def get_short_name(self, soup):
         pass
 
     def get_waiver_wire(self, soup):

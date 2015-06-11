@@ -3,6 +3,7 @@ class League(object):
     def __init__(self):
         self.id = None
         self.name = None
+        self.short_name = None
         self.is_major = None
         self.team_ids = None
         self.waiver_wire = None
@@ -12,6 +13,6 @@ class League(object):
     def save(self, cur):
         cur.execute('''
             insert or replace into leagues
-            (id, name)
+            (id, name, short_name)
             values
-            (?, ?)''', (self.id, self.name))
+            (?, ?, ?)''', (self.id, self.name, self.short_name))
