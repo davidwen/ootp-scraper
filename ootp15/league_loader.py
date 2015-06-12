@@ -31,6 +31,17 @@ class LeagueLoader(league_loader.LeagueLoader):
                 team_ids.append(int(url.split('_')[1].split('.')[0]))
         return team_ids
 
+    def get_team_short_names(self, soup):
+        team_short_names = {}
+        table = soup.find_all('table')[-2]
+        links = table.find_all('a')
+        for link in links:
+            url = link['href']
+            if 'teams/team' in url:
+                team_id = int(url.split('_')[1].split('.')[0])
+                team_short_names[team_id] = link.text
+        return team_short_names
+
     def get_waiver_wire(self, soup):
         waiver_wire = {}
         tables = soup.find_all('table', class_='data sortable')

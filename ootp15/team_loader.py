@@ -1,6 +1,7 @@
 import re
 
 from loaders import team_loader
+from ootp15.league_loader import LeagueLoader
 
 class TeamLoader(team_loader.TeamLoader):
 
@@ -28,6 +29,11 @@ class TeamLoader(team_loader.TeamLoader):
     def get_league_id(self):
         link = self.home_soup.find('a')
         return int(link['href'].split('_')[1].split('.')[0])
+
+    def get_short_name(self):
+        league_id = self.get_league_id()
+        league = LeagueLoader().load_league(league_id)
+        return league.team_short_names[self.team_id]
 
     def get_player_positions(self):
         player_positions = {}

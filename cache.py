@@ -1,2 +1,3 @@
 PLAYER_CACHE = {}
 TEAM_CACHE = {}
+LEAGUE_CACHE = {}

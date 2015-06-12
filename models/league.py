@@ -9,6 +9,7 @@ class League(object):
         self.waiver_wire = None
         self.injured_player_ids = None
         self.payrolls = None
+        self.team_short_names = None
 
     def save(self, cur):
         cur.execute('''

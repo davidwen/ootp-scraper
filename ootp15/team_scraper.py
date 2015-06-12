@@ -44,10 +44,10 @@ class TeamScraper(object):
                 team = TeamLoader(team_id).team
                 cur.execute('''
                     insert or replace into teams
-                    (id, name, level, parent_id, league_id)
+                    (id, name, level, parent_id, league_id, short_name)
                     values
-                    (?, ?, ?, ?, ?)
-                    ''', (team_id, team.name, team.level, team.parent_team_id, team.league_id))
+                    (?, ?, ?, ?, ?, ?)
+                    ''', (team_id, team.name, team.level, team.parent_team_id, team.league_id, team.short_name))
                 for player_id in team.player_positions:
                     cur_player_teams[player_id] = team_id
         for player_id in  FreeAgentsLoader().player_positions:

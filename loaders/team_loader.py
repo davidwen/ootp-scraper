@@ -27,6 +27,7 @@ class TeamLoader(Loader):
         team = Team()
         team.id = self.team_id
         team.name = self.get_name()
+        team.short_name = self.get_short_name()
         team.level = self.get_level()
         team.parent_team_id = self.get_parent_team_id()
         team.league_id = self.get_league_id()
@@ -36,6 +37,9 @@ class TeamLoader(Loader):
         return team
 
     def get_name(self):
+        pass
+
+    def get_short_name(self):
         pass
 
     def get_level(self):
