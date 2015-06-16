@@ -37,15 +37,17 @@ class Player(object):
              self.leadership, self.loyalty, self.desire_for_win, self.greed, self.intelligence, self.work_ethic,
              self.bats, self.throws, self.position, self.retired))
 
-    def save_stats(self, cur):    
+    def save_stats(self, cur, year=None):    
         self.save(cur)
         if self.pitching_stats:
             for stat in self.pitching_stats:
-                stat.save(cur)
+                if year is None or stat.year == year:
+                    stat.save(cur)
             PitcherCareerStat().combine(self.pitching_stats).save(cur)
         if self.batting_stats:
             for stat in self.batting_stats:
-                stat.save(cur)
+                if year is None or stat.year == year:
+                    stat.save(cur)
             BatterCareerStat().combine(self.batting_stats).save(cur)
 
     def save_ratings(self, cur, date_id):

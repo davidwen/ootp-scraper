@@ -11,7 +11,7 @@ class OOTP15Scraper(object):
         pass
 
     def scrape(self):
-        StatsScraper().save_stats()
+        StatsScraper().save_stats(year=2040)
         CheckScraper().update_checks()
         WaiverWireScraper().update_waiver_wire()
         RatingsScraper().save_ratings()
