@@ -27,10 +27,29 @@ class LeagueHistoryScraper(object):
                             try:
                                 response = urllib2.urlopen('http://worldbaseballhierarchy.com/lgreports/news/html/history/sl_stats_%d_%d_%d.html' % (league.id, division, year))
                                 soup = BeautifulSoup(response.read())
-                                self.update_league_history(cur, soup, league, year, division)
+                                self.update_league_history(cur, soup, league.id, year, division)
                             except urllib2.HTTPError:
                                 pass
             db.commit()
+
+    # def save_league_history(self):
+    #     with closing(sqlite3.connect(configuration.DATABASE)) as db:
+    #         cur = db.cursor()
+    #         years = self.get_years(cur)
+    #         for league in [128, 132, 136, 140]:
+    #             for year in years:
+    #                 if year < 2011:
+    #                     continue
+    #                 for division in range(0, 2):
+    #                     print '{} {} {}'.format(league, year, division)
+    #                     try:
+    #                         with open('{}/history/sl_stats_{}_{}_{}.html'.format(configuration.ROOT, league, division, year), 'rb') as f:
+    #                             soup = BeautifulSoup(f.read())
+    #                             self.update_league_history(cur, soup, league, year, division)
+    #                     except:
+    #                         print 'error'
+    #                         pass
+    #         db.commit()
 
     def get_years(self, cur):
         years = []
@@ -39,7 +58,7 @@ class LeagueHistoryScraper(object):
             years.append(row[0])
         return years
 
-    def update_league_history(self, cur, soup, league, year, division):
+    def update_league_history(self, cur, soup, league_id, year, division):
         th = soup.find('th', text=re.compile('LEAGUE STANDINGS'))
         table = th.parent.parent.next_sibling.next_sibling
         rows = table.find_all('tr')
@@ -54,4 +73,4 @@ class LeagueHistoryScraper(object):
                 insert or replace into team_leagues
                 (team_id, year, league_id, division, wins, losses)
                 values
-                (?, ?, ?, ?, ?, ?)''', (team_id, year, league.id, 'LAD' if division == 0 else 'LOD', wins, losses))
+                (?, ?, ?, ?, ?, ?)''', (team_id, year, league_id, 'LAD' if division == 0 else 'LOD', wins, losses))
