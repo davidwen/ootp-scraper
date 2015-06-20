@@ -216,6 +216,18 @@ CREATE TABLE IF NOT EXISTS teams(
     short_name TEXT,
     FOREIGN KEY (parent_id) REFERENCES teams(id));
 
+CREATE TABLE IF NOT EXISTS team_leagues(
+    team_id INTEGER,
+    year INTEGER,
+    league_id INTEGER,
+    division TEXT,
+    wins INTEGER,
+    losses INTEGER,
+    champion INTEGER,
+    PRIMARY KEY (team_id, year),
+    FOREIGN KEY (team_id) REFERENCES teams(id),
+    FOREIGN KEY (league_id) REFERENCES leagues(id));
+
 CREATE TABLE IF NOT EXISTS player_teams(
     player_id INTEGER,
     date_id INTEGER,
